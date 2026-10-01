@@ -1,0 +1,9 @@
+:root {
+  --color-background-primary: #ffffff;
+  --color-background-secondary: #f5f5f5;
+  --color-text-primary: #222222;
+  --color-text-secondary: #666666;
+  --content-max-width: 1200px;
+  --section-spacing: 6rem;
+  --container-padding: 1.5rem;
+}
