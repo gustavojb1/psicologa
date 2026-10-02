@@ -1,0 +1,139 @@
+.footer {
+  padding-block: clamp(3rem, 5vw, 4rem) 2rem;
+  color: #f5f8fc;
+  background-color: #071321;
+}
+
+.footer__main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 13rem);
+  gap: 2.5rem;
+}
+
+.footer__identity,
+.footer__nav {
+  min-width: 0;
+}
+
+.footer__name {
+  font-size: clamp(1.5rem, 2.2vw, 1.85rem);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+}
+
+.footer__profession {
+  margin-top: 0.85rem;
+  color: #c4cfdb;
+  font-size: 0.95rem;
+}
+
+.footer__registration {
+  margin-top: 0.35rem;
+  color: #a6b5c6;
+  font-size: 0.8rem;
+}
+
+.footer__nav-title {
+  margin-bottom: 0.65rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
+.footer__links {
+  list-style: none;
+}
+
+.footer__links a {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  min-height: 44px;
+  padding-block: 0.5rem;
+  color: #b9c8d8;
+  font-size: 0.9rem;
+  transition: color 160ms ease;
+}
+
+.footer__links a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+}
+
+.footer__links a:focus-visible {
+  outline: 2px solid #a8c8e8;
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.footer__copyright {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgb(255 255 255 / 12%);
+  color: #a6b5c6;
+  font-size: 0.75rem;
+  line-height: 1.7;
+}
+
+.footer__identity,
+.footer__copyright,
+.footer__links a {
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 768px) {
+  .footer {
+    padding-block: clamp(2.5rem, 4vw, 3rem) 1.5rem;
+  }
+
+  .footer__container {
+    width: min(calc(100% - 8vw), 1180px);
+    padding-inline: 0;
+  }
+
+  .footer__main {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: clamp(2rem, 5vw, 4rem);
+    max-width: 960px;
+    margin-inline: auto;
+  }
+
+  .footer__profession {
+    margin-top: 0.4rem;
+  }
+
+  .footer__registration {
+    margin-top: 0.2rem;
+  }
+
+  .footer__nav-title {
+    margin-bottom: 0.35rem;
+  }
+
+  .footer__links {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    column-gap: clamp(1.25rem, 2.5vw, 2rem);
+  }
+
+  .footer__copyright {
+    margin-top: 1.5rem;
+    padding-top: 0.85rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer__main {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer__links a { transition: none; }
+}

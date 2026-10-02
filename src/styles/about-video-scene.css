@@ -1,0 +1,35 @@
+﻿.about-video-scene {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  isolation: isolate;
+  background: #eff5fb;
+}
+/* Both layers occupy the same grid area. Only content determines scene length;
+   there is no spacer or negative margin compensating for the sticky layer. */
+.about-video-scene__background {
+  grid-area: 1 / 1;
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100vh;
+  height: 100svh;
+  z-index: 0;
+  pointer-events: none;
+}
+.about-video-scene__background img {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center;
+}
+.about-video-scene__content {
+  grid-area: 1 / 1;
+  position: relative;
+  min-width: 0;
+  z-index: 1;
+}
+@media (max-width: 800px) {
+  .about-video-scene__background img { object-position: 65% center; }
+}
