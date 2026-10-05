@@ -1,6 +1,10 @@
-.hero-transition { position: relative; isolation: isolate; }
-.hero-transition__track { position: absolute; top: 0; left: 0; width: 1px; height: 230svh; pointer-events: none; }
-.hero-transition__runway { height: 60svh; }
+.hero-transition {
+  --hero-height: 100svh;
+  position: relative;
+  isolation: isolate;
+}
+/* One scene height of animation, with no empty runway before Courses. */
+.hero-transition__track { position: absolute; top: 0; left: 0; width: 1px; height: calc(var(--hero-height) * 2); pointer-events: none; }
 
 .hero__viewport {
   --hero-background-travel: 0.025;
@@ -11,7 +15,7 @@
   top: 0;
   width: 100%;
   height: 100vh;
-  height: 100svh;
+  height: var(--hero-height);
   overflow: hidden;
   isolation: isolate;
   background-color: var(--color-background-secondary);
@@ -56,9 +60,6 @@
 }
 
 @media (max-width: 1024px) {
-  .hero-transition__track { height: 205svh; }
-  .hero-transition__runway { height: 38svh; }
-
   .hero__viewport {
     --hero-background-travel: 0.02;
     --hero-foreground-travel: 0.10;
@@ -66,13 +67,12 @@
   }
 }
 
-@media (max-width: 768px) {
-  .hero-transition__track { height: 190svh; }
-  .hero-transition__runway { height: 32svh; }
+@media (max-width: 620px) {
+  .hero-transition { --hero-height: clamp(560px, calc(78vw + 285px), 760px); }
 
   .hero__viewport {
     --hero-background-travel: 0.015;
-    --hero-foreground-travel: 0.075;
+    --hero-foreground-travel: 0.035;
   }
 
   .hero__background img {
@@ -80,16 +80,19 @@
   }
 
   .hero__foreground img {
-    /* Keep vertical framing safe; horizontal cropping preserves mobile presence. */
+    /* This asset has its own vertical composition and embedded copy. */
     width: auto;
-    height: 92svh;
-    max-width: none;
-    transform: translateX(-50%) translateY(clamp(1.5svh, 2vw, 3svh));
+    height: 100%;
+    max-width: 100%;
+    max-height: none;
+    object-position: center bottom;
+    transform: translateX(-50%) translateY(2px);
   }
+
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-transition__track, .hero-transition__runway { display: none; }
+  .hero-transition__track { display: none; }
 
   .hero__viewport {
     position: relative;

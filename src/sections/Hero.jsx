@@ -2,7 +2,11 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import heroBackground from '../assets/images/hero-background.jpeg'
 import heroPerson from '../assets/images/hero-person.png'
+import heroPersonMobile from '../assets/images/hero-person-mobile.png'
 import '../styles/hero.css'
+
+// Both files contain the complete approved composition for their aspect ratio.
+const heroImages = { desktop: heroPerson, mobile: heroPersonMobile }
 
 function Hero({ children }) {
   const trackRef = useRef(null)
@@ -44,7 +48,9 @@ function Hero({ children }) {
     offset: ['start start', `end ${geometry.height}px`],
   })
   const backgroundY = useTransform(scrollYProgress, [0, 0.46, 1], [0, prefersReducedMotion ? 0 : -geometry.background * 0.6, prefersReducedMotion ? 0 : -geometry.background])
-  const foregroundY = useTransform(scrollYProgress, [0, 0.46, 0.7, 1], [0, prefersReducedMotion ? 0 : -geometry.foreground, prefersReducedMotion ? 0 : -geometry.foreground - geometry.height * 0.08, prefersReducedMotion ? 0 : -geometry.foreground - geometry.height * 0.2])
+  // Courses starts covering the scene immediately. Keep foreground travel
+  // slower than that cover, without the old late upward jump exposing its base.
+  const foregroundY = useTransform(scrollYProgress, [0, 1], [0, prefersReducedMotion ? 0 : -geometry.foreground])
 
   return (
     <div className="hero-transition">
@@ -54,10 +60,12 @@ function Hero({ children }) {
           <img src={heroBackground} alt="" aria-hidden="true" />
         </motion.div>
         <motion.div className="hero__foreground" style={{ y: foregroundY }}>
-          <img ref={personRef} src={heroPerson} alt="Psicóloga Lavínia" />
+          <picture>
+            <source media="(max-width: 620px)" srcSet={heroImages.mobile} />
+            <img ref={personRef} src={heroImages.desktop} alt="A Virada — Pare. Vire. Recomece." fetchPriority="high" />
+          </picture>
         </motion.div>
       </section>
-      <div className="hero-transition__runway" aria-hidden="true" />
       {children}
     </div>
   )

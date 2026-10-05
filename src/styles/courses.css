@@ -3,7 +3,8 @@
   z-index: 1;
   overflow: hidden;
   padding-block: clamp(3rem, 5.5vw, 5.5rem);
-  background: linear-gradient(to bottom, #f5f5f5 0, #f4f8fb clamp(5rem, 12svh, 10rem));
+  padding-top: clamp(1.25rem, 2.5vw, 2.5rem);
+  background: #f4f8fb;
 }
 
 .courses__grid {
@@ -26,6 +27,10 @@
 
 .courses__main {
   min-height: clamp(44rem, 54vw, 52rem);
+}
+
+.courses__main-media {
+  display: contents;
 }
 
 .courses__main-image {
@@ -371,6 +376,7 @@
 @media (max-width: 620px) {
   .courses {
     padding-block: 2rem;
+    padding-top: 1.25rem;
   }
 
   .courses__main {
@@ -393,13 +399,18 @@
 
   .courses__main-image {
     position: relative;
-    order: 2;
-    height: auto;
-    aspect-ratio: 16 / 9;
-    object-fit: contain;
-    object-position: center;
+    width: calc(100% + 2.7rem);
+    height: clamp(17rem, 82vw, 21rem);
+    margin: 1.5rem -1.35rem 0;
+    object-fit: cover;
+    object-position: center 47%;
     -webkit-mask-image: none;
     mask-image: none;
+  }
+
+  .courses__main-media {
+    display: block;
+    overflow: hidden;
   }
 
   .courses__title-group h2 {

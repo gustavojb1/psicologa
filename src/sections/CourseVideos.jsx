@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import primaryVideoWeb from '../assets/images/video-web.mp4'
 import '../styles/course-videos.css'
 
 // Each course has its own video file URL, poster image and checkout link.
@@ -8,20 +9,38 @@ export const courseVideos = [{
   course: 'A Virada — Apostas',
   title: 'Talvez a sua virada comece aqui.',
   description: 'Antes de decidir, assista a esta mensagem da Dra. Tais Maciel e entenda por que compreender o ciclo das apostas pode ser o primeiro passo para mudar sua relação com o jogo.',
-  videoUrl: '',
+  videoUrl: primaryVideoWeb,
   poster: null,
   ctaLabel: 'QUERO COMEÇAR A MINHA VIRADA',
   ctaUrl: '#',
 }]
 
 // Native video today; future embed integrations can replace this branch.
-function VideoPlayer({ videoUrl, poster, course }) {
-  const [playing, setPlaying] = useState(false)
+function VideoPlayer({ videoUrl, poster, course, reducedMotion }) {
+  const videoRef = useRef(null)
   const [failed, setFailed] = useState(false)
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video || !videoUrl) return undefined
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.35 && !reducedMotion) {
+        video.play().catch(() => {})
+      } else {
+        video.pause()
+      }
+    }, { threshold: [0, 0.35, 0.75] })
+
+    observer.observe(video)
+    return () => observer.disconnect()
+  }, [videoUrl, reducedMotion])
+
   return <div className="course-video__player">
-    {playing && videoUrl ? <>
-      <video controls autoPlay playsInline preload="metadata" poster={poster || undefined} aria-label={`Vídeo: ${course}`} onError={() => setFailed(true)}>
-        <source src={videoUrl} />Seu navegador não suporta este vídeo.
+    {videoUrl ? <>
+      <video ref={videoRef} controls muted playsInline loop preload="metadata" poster={poster || undefined} aria-label={`Vídeo: ${course}`} onError={() => setFailed(true)}>
+        <source src={videoUrl} type="video/mp4" />
+        Seu navegador não suporta este vídeo.
       </video>
       {failed && <p className="course-video__error" role="status">Não foi possível carregar o vídeo. Tente novamente mais tarde.</p>}
     </> : <>
@@ -30,7 +49,7 @@ function VideoPlayer({ videoUrl, poster, course }) {
         <span className="course-video__placeholder-label">Capa do vídeo</span>
         <span className="course-video__signature">Uma mensagem da Dra. Tais Maciel</span>
       </div>}
-      <button className="course-video__play" type="button" aria-label={videoUrl ? `Reproduzir vídeo: ${course}` : `Vídeo de ${course} em breve`} aria-disabled={!videoUrl} onClick={() => { if (videoUrl) setPlaying(true) }}>
+      <button className="course-video__play" type="button" aria-label={`Vídeo de ${course} em breve`} aria-disabled="true">
         <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M10 5 27 16 10 27Z" /></svg>
       </button>
     </>}
@@ -56,7 +75,7 @@ function CourseVideos() {
         <motion.article key={item.id} initial={{ opacity: reducedMotion ? 1 : 0, x: reducedMotion ? 0 : 12 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: reducedMotion ? 1 : 0, x: reducedMotion ? 0 : -12 }} transition={{ duration: reducedMotion ? 0 : 0.25 }}>
           <motion.h2 id="course-video-title" {...reveal(0.05)}>{item.title.split(/(virada)/gi).map((part, index) => part.toLowerCase() === 'virada' ? <span key={index}>{part}</span> : part)}</motion.h2>
           <motion.p className="course-videos__description" {...reveal(0.1)}>{item.description}</motion.p>
-          <motion.div {...reveal(0.15)}><VideoPlayer videoUrl={item.videoUrl} poster={item.poster} course={item.course} /></motion.div>
+          <motion.div {...reveal(0.15)}><VideoPlayer videoUrl={item.videoUrl} poster={item.poster} course={item.course} reducedMotion={reducedMotion} /></motion.div>
           <motion.p className="course-videos__message" {...reveal(0.05)}>Você não precisa esperar perder mais para começar a mudar.</motion.p>
           <motion.div {...reveal(0.1)}><a className="course-videos__cta" href={item.ctaUrl}>{item.ctaLabel}<span aria-hidden="true">→</span></a></motion.div>
         </motion.article>

@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import mainCourseImage from '../assets/images/Background-Imagem1-Bloco2.png'
+import mainCourseImageMobile from '../assets/images/livro-mobile.png'
 import cycleImage from '../assets/images/Background-Imagem2-Bloco2.png'
 import changeImage from '../assets/images/Background-Imagem3-Bloco2.png'
 import '../styles/courses.css'
@@ -38,7 +39,8 @@ function Courses() {
   const reveal = {
     initial: prefersReducedMotion ? false : { opacity: 0, y: 18 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, amount: 0.18 },
+    // Reveal as soon as the card enters, even when it is taller than a phone.
+    viewport: { once: true, amount: 0.01 },
     transition: { duration: prefersReducedMotion ? 0 : 0.65, ease: [0.22, 1, 0.36, 1] },
   }
 
@@ -46,11 +48,6 @@ function Courses() {
     <section id="cursos" className="courses" aria-labelledby="courses-title">
       <div className="container courses__grid">
         <motion.article className="courses__main" {...reveal}>
-          <img
-            className="courses__main-image"
-            src={mainCourseImage}
-            alt="Mockup do programa A Virada Apostas em uma paisagem de montanhas"
-          />
           <div className="courses__main-content">
             <header className="courses__title-group">
               <p className="courses__label"><span>CURSO ONLINE</span></p>
@@ -65,6 +62,15 @@ function Courses() {
               Um programa desenvolvido para ajudar você a compreender os mecanismos por trás das apostas,
               identificar seus gatilhos e construir estratégias práticas para interromper esse ciclo.
             </p>
+
+            <picture className="courses__main-media">
+              <source media="(max-width: 620px)" srcSet={mainCourseImageMobile} />
+              <img
+                className="courses__main-image"
+                src={mainCourseImage}
+                alt="Mockup do programa A Virada Apostas em uma paisagem de montanhas"
+              />
+            </picture>
 
             <ul className="courses__highlights" aria-label="Informações do programa">
               {highlights.map((highlight) => (
