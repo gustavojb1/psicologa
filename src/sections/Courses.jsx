@@ -3,6 +3,7 @@ import mainCourseImage from '../assets/images/Background-Imagem1-Bloco2.png'
 import mainCourseImageMobile from '../assets/images/livro-mobile.png'
 import cycleImage from '../assets/images/Background-Imagem2-Bloco2.png'
 import changeImage from '../assets/images/Background-Imagem3-Bloco2.png'
+import { HOTMART_URL } from '../constants/links'
 import '../styles/courses.css'
 
 const highlights = [
@@ -31,7 +32,14 @@ const modules = [
 ]
 
 function HighlightIcon({ type }) {
-  return <span className={`courses__highlight-icon courses__highlight-icon--${type}`} aria-hidden="true" />
+  const paths = {
+    book: <><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Z" /><path d="M12 6v14" /></>,
+    play: <><rect x="3" y="4" width="18" height="13" rx="2" /><path d="m10 8 5 2.5-5 2.5V8ZM12 17v3M8 20h8" /></>,
+    person: <><circle cx="12" cy="7" r="4" /><path d="M4 21v-2a8 8 0 0 1 16 0v2" /></>,
+  }
+  return <span className="courses__highlight-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" focusable="false">{paths[type]}</svg>
+  </span>
 }
 
 function Courses() {
@@ -82,8 +90,7 @@ function Courses() {
               ))}
             </ul>
 
-            {/* Substituir futuramente o href pela URL da Hotmart e adicionar target="_blank" e rel="noopener noreferrer". */}
-            <a className="courses__cta" href="#">
+            <a className="courses__cta" href={HOTMART_URL} target="_blank" rel="noopener noreferrer">
               <span>CONHEÇA O PROGRAMA</span>
               <span aria-hidden="true">→</span>
             </a>
@@ -105,9 +112,11 @@ function Courses() {
                 <h3>{module.title}</h3>
                 <p className="courses__module-subtitle">{module.subtitle}</p>
                 <p className="courses__module-description">{module.description}</p>
-                <button className="courses__module-button" type="button" aria-label={`${module.title}: em breve`}>
-                  <span aria-hidden="true">→</span>
-                </button>
+                <a className="courses__module-button" href={HOTMART_URL} target="_blank" rel="noopener noreferrer" aria-label={`Conhecer o programa A Virada — Apostas: ${module.title}`}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+                    <path d="M4 12h16m-6-6 6 6-6 6" />
+                  </svg>
+                </a>
               </div>
             </motion.article>
           ))}

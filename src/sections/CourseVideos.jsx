@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import primaryVideoWeb from '../assets/images/video-web.mp4'
+import { HOTMART_URL } from '../constants/links'
 import '../styles/course-videos.css'
 
 // Each course has its own video file URL, poster image and checkout link.
@@ -12,7 +13,7 @@ export const courseVideos = [{
   videoUrl: primaryVideoWeb,
   poster: null,
   ctaLabel: 'QUERO COMEÇAR A MINHA VIRADA',
-  ctaUrl: '#',
+  ctaUrl: HOTMART_URL,
 }]
 
 // Native video today; future embed integrations can replace this branch.
@@ -77,7 +78,7 @@ function CourseVideos() {
           <motion.p className="course-videos__description" {...reveal(0.1)}>{item.description}</motion.p>
           <motion.div {...reveal(0.15)}><VideoPlayer videoUrl={item.videoUrl} poster={item.poster} course={item.course} reducedMotion={reducedMotion} /></motion.div>
           <motion.p className="course-videos__message" {...reveal(0.05)}>Você não precisa esperar perder mais para começar a mudar.</motion.p>
-          <motion.div {...reveal(0.1)}><a className="course-videos__cta" href={item.ctaUrl}>{item.ctaLabel}<span aria-hidden="true">→</span></a></motion.div>
+          <motion.div {...reveal(0.1)}><a className="course-videos__cta" href={item.ctaUrl} target="_blank" rel="noopener noreferrer">{item.ctaLabel}<span aria-hidden="true">→</span></a></motion.div>
         </motion.article>
       </AnimatePresence>
       {courseVideos.length > 1 && <nav className="course-videos__controls" aria-label="Vídeos dos cursos">

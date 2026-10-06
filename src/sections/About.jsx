@@ -2,8 +2,7 @@ import { motion, useReducedMotion } from 'framer-motion'
 import doctorPortrait from '../assets/images/Médica pensativa.png'
 import '../styles/about.css'
 
-// Replace when the checkout URL is available.
-const startUrl = '#'
+import { HOTMART_URL } from '../constants/links'
 
 function AboutIcon({ kind }) {
   const paths = {
@@ -53,7 +52,7 @@ function About() {
           <ul className="about__benefits" aria-label="Destaques do acompanhamento">
             {benefits.map(({ icon, text }) => <li key={icon}><AboutIcon kind={icon} /><span>{text}</span></li>)}
           </ul>
-          <a className="about__cta" href={startUrl}><span>COMECE A SUA VIRADA</span><span aria-hidden="true">→</span></a>
+          <a className="about__cta" href={HOTMART_URL} target="_blank" rel="noopener noreferrer"><span>COMECE A SUA VIRADA</span><span aria-hidden="true">→</span></a>
         </motion.div>
         <motion.div className="about__portrait" {...reveal('x')}>
           <img src={doctorPortrait} alt="Dra. Tais Maciel, médica psiquiatra, sentada à mesa com as mãos sob o queixo" loading="lazy" />

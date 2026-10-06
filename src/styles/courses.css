@@ -146,64 +146,18 @@
 }
 
 .courses__highlight-icon {
-  position: relative;
-  display: inline-block;
-  width: 3.4rem;
-  height: 3.4rem;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
   margin-bottom: 0.65rem;
   border-radius: 50%;
+  color: #142433;
   background: rgba(229, 237, 243, 0.9);
 }
 
-.courses__highlight-icon::before,
-.courses__highlight-icon::after {
-  position: absolute;
-  content: '';
-}
-
-.courses__highlight-icon--book::before {
-  top: 0.85rem;
-  left: 0.78rem;
-  width: 1.45rem;
-  height: 1.15rem;
-  border: 2px solid #142433;
-  border-radius: 0.15rem;
-}
-
-.courses__highlight-icon--book::after {
-  top: 0.85rem;
-  left: 1.48rem;
-  width: 2px;
-  height: 1.2rem;
-  background: #142433;
-}
-
-.courses__highlight-icon--play::before {
-  top: 0.8rem;
-  left: 1.15rem;
-  border-top: 0.7rem solid transparent;
-  border-bottom: 0.7rem solid transparent;
-  border-left: 1rem solid #142433;
-}
-
-.courses__highlight-icon--person::before {
-  top: 0.67rem;
-  left: 1.14rem;
-  width: 0.62rem;
-  height: 0.62rem;
-  border: 2px solid #142433;
-  border-radius: 50%;
-}
-
-.courses__highlight-icon--person::after {
-  bottom: 0.62rem;
-  left: 0.85rem;
-  width: 1.25rem;
-  height: 0.75rem;
-  border: 2px solid #142433;
-  border-bottom: 0;
-  border-radius: 1rem 1rem 0 0;
-}
+.courses__highlight-icon svg { width: 1.5rem; height: 1.5rem; }
 
 .courses__highlights strong {
   color: #15212c;
@@ -328,7 +282,19 @@
   background: rgba(228, 237, 244, 0.94);
   font-size: 1.65rem;
   line-height: 1;
-  cursor: default;
+  cursor: pointer;
+  transition: background-color 180ms ease;
+}
+
+.courses__module-button svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  transition: transform 180ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .courses__module-button:hover { background: #d5e2ec; }
+  .courses__module-button:hover svg { transform: translateX(3px); }
 }
 
 @media (max-width: 1100px) {
@@ -465,7 +431,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .courses__cta {
+  .courses__cta, .courses__module-button, .courses__module-button svg {
     transition: none;
   }
 }

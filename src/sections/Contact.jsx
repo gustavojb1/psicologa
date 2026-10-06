@@ -1,13 +1,9 @@
 ﻿import { motion, useReducedMotion } from 'framer-motion'
 import '../styles/contact.css'
 
-// Substituir value e href pelos dados reais da cliente.
-// WhatsApp: https://wa.me/55DDDNUMERO (somente dígitos).
-// Instagram: https://instagram.com/usuario; Facebook: URL da página/perfil.
 const contactLinks = [
-  { id: 'whatsapp', label: 'WhatsApp', value: '(00) 00000-0000', href: '#' },
-  { id: 'instagram', label: 'Instagram', value: '@usuario', href: '#' },
-  { id: 'facebook', label: 'Facebook', value: 'facebook.com/perfil', href: '#' },
+  { id: 'whatsapp', label: 'WhatsApp', value: '(35) 99894-3022', href: 'https://wa.me/5535998943022' },
+  { id: 'instagram', label: 'Instagram', value: '@drataismaciel.psiquiatra', href: 'https://www.instagram.com/drataismaciel.psiquiatra/' },
 ]
 
 function Contact() {
@@ -23,20 +19,17 @@ function Contact() {
     <section id="contato" className="contact" aria-labelledby="contact-title">
       <div className="container">
         <motion.header className="contact__heading" {...reveal()}>
-          <p className="contact__eyebrow">CONTATO</p>
-          <h2 id="contact-title">Vamos conversar?</h2>
+          <p id="contact-title" className="contact__eyebrow">CONTATO</p>
         </motion.header>
         <ul className="contact__links">
           {contactLinks.map((link, index) => {
-            const isPlaceholder = link.href === '#'
             return (
               <motion.li key={link.id} {...reveal(0.06 + index * 0.07)}>
                 <a
                   className="contact__link"
                   href={link.href}
-                  target={isPlaceholder ? undefined : '_blank'}
-                  rel={isPlaceholder ? undefined : 'noopener noreferrer'}
-                  onClick={isPlaceholder ? (event) => event.preventDefault() : undefined}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <span className="contact__label">{link.label}</span>
                   <span className="contact__value">{link.value}</span>
