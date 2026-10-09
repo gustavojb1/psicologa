@@ -115,6 +115,7 @@
   content: '';
 }
 .testimonials__avatar {
+  position: relative;
   display: grid;
   flex: 0 0 4.4rem;
   place-items: center;
@@ -128,7 +129,7 @@
   font-weight: 600;
   letter-spacing: 0.06em;
 }
-.testimonials__avatar img { width: 100%; height: 100%; object-fit: cover; }
+.testimonials__avatar img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
 .testimonials__author-text {
   display: flex;
   flex-direction: column;

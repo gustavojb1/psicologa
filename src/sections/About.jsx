@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import doctorPortrait from '../assets/images/Médica pensativa.png'
+import doctorPortrait from '../assets/images/medica.png'
 import '../styles/about.css'
 
 import { HOTMART_URL } from '../constants/links'

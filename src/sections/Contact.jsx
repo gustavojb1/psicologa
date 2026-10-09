@@ -2,7 +2,6 @@
 import '../styles/contact.css'
 
 const contactLinks = [
-  { id: 'whatsapp', label: 'WhatsApp', value: '(35) 99894-3022', href: 'https://wa.me/5535998943022' },
   { id: 'instagram', label: 'Instagram', value: '@drataismaciel.psiquiatra', href: 'https://www.instagram.com/drataismaciel.psiquiatra/' },
 ]
 
@@ -17,7 +16,7 @@ function Contact() {
 
   return (
     <section id="contato" className="contact" aria-labelledby="contact-title">
-      <div className="container">
+      <div className="container contact__content">
         <motion.header className="contact__heading" {...reveal()}>
           <p id="contact-title" className="contact__eyebrow">CONTATO</p>
         </motion.header>
@@ -31,8 +30,13 @@ function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <span className="contact__label">{link.label}</span>
-                  <span className="contact__value">{link.value}</span>
+                  <span className="contact__details">
+                    <span className="contact__label">{link.label}</span>
+                    <span className="contact__value">{link.value}</span>
+                  </span>
+                  <svg className="contact__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+                    <path d="M4 12h16m-6-6 6 6-6 6" />
+                  </svg>
                 </a>
               </motion.li>
             )

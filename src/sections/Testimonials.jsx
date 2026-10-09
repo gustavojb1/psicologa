@@ -1,5 +1,8 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import background from '../assets/images/Background-Bloco3-Feedback.png'
+import lucasAvatar from '../assets/images/1.jpeg'
+import amandaAvatar from '../assets/images/3.jpeg'
+import pauloAvatar from '../assets/images/2.jpeg'
 import '../styles/testimonials.css'
 
 // Relatos temporários: substituir pelos depoimentos reais aprovados pela cliente antes da publicação final.
@@ -10,7 +13,8 @@ const testimonials = [
     text: 'Eu achava que conseguiria parar quando quisesse. O curso me fez entender que o problema era muito maior do que simplesmente ter força de vontade.',
     name: 'Lucas M.',
     role: 'Aluno da A Virada — Apostas',
-    avatar: null,
+    avatar: lucasAvatar,
+    avatarPosition: '50% 35%',
   },
   {
     id: 2,
@@ -18,7 +22,8 @@ const testimonials = [
     text: 'Pela primeira vez consegui entender meus gatilhos e perceber o que acontecia comigo antes de voltar a apostar. O conteúdo é direto, prático e realmente transformador.',
     name: 'Amanda R.',
     role: 'Aluna da A Virada — Apostas',
-    avatar: null,
+    avatar: amandaAvatar,
+    avatarPosition: '50% 40%',
   },
   {
     id: 3,
@@ -26,7 +31,8 @@ const testimonials = [
     text: 'O curso me ajudou a reconstruir minha relação com o dinheiro e com minha rotina. Hoje me sinto muito mais consciente e no controle das minhas escolhas.',
     name: 'Paulo F.',
     role: 'Aluno da A Virada — Apostas',
-    avatar: null,
+    avatar: pauloAvatar,
+    avatarPosition: '50% 20%',
   },
 ]
 
@@ -68,7 +74,7 @@ function Testimonials() {
               </blockquote>
               <figcaption className="testimonials__author">
                 <span className="testimonials__avatar" aria-hidden="true">
-                  {testimonial.avatar ? <img src={testimonial.avatar} alt="" /> : testimonial.name.split(' ').map((part) => part[0]).join('')}
+                  {testimonial.avatar ? <img src={testimonial.avatar} alt="" style={{ objectPosition: testimonial.avatarPosition }} /> : testimonial.name.split(' ').map((part) => part[0]).join('')}
                 </span>
                 <span className="testimonials__author-text">
                   <strong>{testimonial.name}</strong>
